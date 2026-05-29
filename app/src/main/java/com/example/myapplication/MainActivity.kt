@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -86,9 +87,10 @@ fun MyApp(onClick: () -> Unit = {}) {
         }
       }
     ) { innerPadding ->
-      BetoPic(
-        modifier = Modifier.padding(innerPadding)
-      )
+      Column(modifier = Modifier.padding(innerPadding)) {
+        BetoPic()
+        CarouselExample()
+      }
     }
   }
 }

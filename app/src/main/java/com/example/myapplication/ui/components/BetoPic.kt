@@ -36,7 +36,7 @@ fun BetoPic(modifier: Modifier = Modifier) {
     contentDescription = "Profile picture",
     contentScale = ContentScale.Crop,
     modifier = modifier
-      .size(120.dp)
+      .size(200.dp)
       .clip(CircleShape)
       .border(2.dp, Color.White, CircleShape)
   )

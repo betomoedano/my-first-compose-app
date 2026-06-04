@@ -48,7 +48,9 @@ fun HomeScreen() {
 
   Column {
     Row(
-      modifier = Modifier.fillMaxWidth().padding(16.dp),
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp),
       horizontalArrangement = Arrangement.End
     ) {
       EditSplitButton()

@@ -25,5 +25,6 @@ fun ProfileScreen() {
   ) {
     BetoPic()
     Text("Profile", style = MaterialTheme.typography.headlineMedium)
+    Text("Profile", style = MaterialTheme.typography.headlineMedium)
   }
 }

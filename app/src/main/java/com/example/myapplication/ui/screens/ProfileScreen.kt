@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -29,12 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.components.BetoPic
 
-/**
- * The Profile tab — currently a placeholder.
- *
- * Same pattern as [FavoritesScreen]: dedicated file per tab so each can grow
- * independently without forcing churn on the others.
- */
 @Preview
 @Composable
 fun ProfileScreen() {
@@ -55,13 +48,17 @@ fun ProfileScreen() {
     LazyColumn(
       modifier = Modifier
         .padding(innerPadding)
-        .border(BorderStroke(1.dp, Color.Red)),
-      verticalArrangement = Arrangement.spacedBy(16.dp)
+        .fillMaxSize(),
+      verticalArrangement = Arrangement.spacedBy(16.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      item {
-        Text("Profile", style = MaterialTheme.typography.headlineMedium)
-        Text("Profile", style = MaterialTheme.typography.headlineMedium)
-        Text("Profile", style = MaterialTheme.typography.headlineMedium)
+      items(users.size) { index ->
+        val user = users[index]
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+          BetoPic(url = user.photo)
+          Text(user.name, style = MaterialTheme.typography.headlineMedium)
+          Text(user.email, style = MaterialTheme.typography.bodySmall)
+        }
       }
     }
   }
@@ -72,11 +69,10 @@ fun MyTopBar() {
   LazyRow(
     modifier = Modifier
       .height(100.dp)
-      .border(BorderStroke(1.dp, Color.Green)),
   ) {
-    // Add 5 items
+    // Add 50 items to match the users
     items(50) { index ->
-      Text(text = "Item: $index")
+      Text(text = "Item: $index ", modifier = Modifier.padding(8.dp))
     }
   }
 }
@@ -93,8 +89,11 @@ data class User(
   val photo: String?
 )
 
-val users = listOf<User>(
-  User("John Doe", "john.mclean@examplepetstore.com", null),
-  User("Beto", "william.henry.moody@my-own-personal-domain.com", "https://github.com/betomoedano.png"),
-  User("Cess Doe", "john.c.calhoun@examplepetstore.com", null),
-)
+val users = List(50) { index ->
+  User(
+    name = "User $index",
+    email = "user$index@example.com",
+    photo = if (index % 3 == 0) "https://github.com/betomoedano.png" else null
+  )
+}
+

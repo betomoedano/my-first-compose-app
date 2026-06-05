@@ -30,9 +30,12 @@ import coil3.compose.AsyncImage
  *   can control layout without the component needing to know about it.
  */
 @Composable
-fun BetoPic(modifier: Modifier = Modifier) {
+fun BetoPic(
+  modifier: Modifier = Modifier,
+  url: String? = "https://github.com/betomoedano.png"
+) {
   AsyncImage(
-    model = "https://github.com/betomoedano.png",
+    model = url,
     contentDescription = "Profile picture",
     contentScale = ContentScale.Crop,
     modifier = modifier

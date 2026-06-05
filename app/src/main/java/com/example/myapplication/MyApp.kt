@@ -91,13 +91,16 @@ fun MyApp(onClick: () -> Unit = {}) {
           AppDestinations.PROFILE -> ProfileScreen()
         }
 
-        // Overlay the FAB menu in the bottom-right corner, except on Profile.
-        if (currentDestination != AppDestinations.PROFILE) {
-          FabMenu(
-            modifier = Modifier.align(Alignment.BottomEnd),
-            onAction = onClick,
-          )
-        }
+        FabMenu(
+          modifier = Modifier.align(
+            if (currentDestination == AppDestinations.PROFILE) {
+              Alignment.BottomStart
+            } else {
+              Alignment.BottomEnd
+            }
+          ),
+          onAction = onClick,
+        )
       }
     }
   }

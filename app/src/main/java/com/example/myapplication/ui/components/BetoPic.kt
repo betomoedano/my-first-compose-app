@@ -29,18 +29,19 @@ import coil3.compose.AsyncImage
  *   Always expose a `modifier` param on reusable composables so the parent
  *   can control layout without the component needing to know about it.
  */
+import androidx.compose.ui.graphics.Shape
+
 @Composable
 fun BetoPic(
   modifier: Modifier = Modifier,
-  url: String? = "https://github.com/betomoedano.png"
+  url: String? = "https://github.com/betomoedano.png",
+  shape: Shape = CircleShape
 ) {
   AsyncImage(
     model = url,
     contentDescription = "Profile picture",
     contentScale = ContentScale.Crop,
     modifier = modifier
-      .size(200.dp)
-      .clip(CircleShape)
-      .border(2.dp, Color.White, CircleShape)
+      .clip(shape)
   )
 }

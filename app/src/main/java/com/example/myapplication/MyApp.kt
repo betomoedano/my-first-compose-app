@@ -91,13 +91,13 @@ fun MyApp(onClick: () -> Unit = {}) {
           AppDestinations.PROFILE -> ProfileScreen()
         }
 
-        // Overlay the FAB menu in the bottom-right corner.
-        // `Modifier.align` is only available inside a BoxScope, which is why
-        // it works here but wouldn't inside a Column.
-        FabMenu(
-          modifier = Modifier.align(Alignment.BottomEnd),
-          onAction = onClick
-        )
+        // Overlay the FAB menu in the bottom-right corner, except on Profile.
+        if (currentDestination != AppDestinations.PROFILE) {
+          FabMenu(
+            modifier = Modifier.align(Alignment.BottomEnd),
+            onAction = onClick,
+          )
+        }
       }
     }
   }

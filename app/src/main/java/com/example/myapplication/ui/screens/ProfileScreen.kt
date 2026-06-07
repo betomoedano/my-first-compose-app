@@ -17,14 +17,19 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -80,7 +85,7 @@ fun ProfileScreen() {
   }
 
   Scaffold(
-//    topBar = { MyTopBar(userList) },
+    topBar = { UsersTopBar() },
 //    bottomBar = {
 //      BottomAppBar() {
 //        MyBottomBar()
@@ -141,6 +146,30 @@ fun ProfileScreen() {
 }
 
 /**
+ * Top app bar for the screen: a "List of Users" title plus a demo shopping-cart
+ * action button on the right (no behavior yet).
+ *
+ * The container color is set to `surfaceContainerHigh` so the bar matches the
+ * page background behind the list items, making it read as one continuous
+ * surface rather than a separate elevated bar.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun UsersTopBar() {
+  TopAppBar(
+    title = { Text("List of Users") },
+    actions = {
+      IconButton(onClick = { /* demo only — no action */ }) {
+        Icon(Icons.Default.ShoppingCart, contentDescription = "Shopping cart")
+      }
+    },
+    colors = TopAppBarDefaults.topAppBarColors(
+      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+    ),
+  )
+}
+
+/**
  * A single filled list item: an avatar plus the user's name and email.
  *
  * The container is clipped to [containerShape] *before* the background is
@@ -160,8 +189,7 @@ private fun UserListItem(
     modifier = Modifier
       .fillMaxWidth()
       .clip(containerShape)
-      // Lowest container tone = near white, so cards pop against the page.
-      .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+      .background(MaterialTheme.colorScheme.surfaceContainerLow)
       .padding(16.dp),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -210,7 +238,7 @@ fun MyTopBar(users: List<User>) {
   val shapePool = rememberShapePool()
 
   LazyRow(
-    modifier = Modifier.height(100.dp).background(MaterialTheme.colorScheme.surfaceContainerLowest),
+    modifier = Modifier.height(100.dp).background(MaterialTheme.colorScheme.surfaceContainerLow),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(8.dp),
     contentPadding = PaddingValues(horizontal = 8.dp)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
@@ -76,7 +77,13 @@ fun MyApp(onClick: () -> Unit = {}) {
       }
     }
   ) {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+    // This outer Scaffold fills the window, so its container color is what
+    // shows behind the transparent status bar. Match it to the list page tone
+    // (surfaceContainerHigh) so the status bar blends with the TopAppBar below.
+    Scaffold(
+      modifier = Modifier.fillMaxSize(),
+      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+    ) { innerPadding ->
       // We use a Box (not Column) here because we want the FAB to overlay
       // the screen content, not sit below it. Children of a Box are stacked
       // in Z order in the order they're declared — screen first, FAB on top.
